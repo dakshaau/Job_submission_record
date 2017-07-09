@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script src="static/js/jquery-3.2.1.min.js"></script>
+		<script src="static/js/bootstrap.js"></script>
+		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="static/css/bootstrap-theme.css">
+	    <title>Trial</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/">Job Application Record <small>under development</small></a>
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav">
+						<span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+					</button>
+				</div>
+
+				<div class="collapse navbar-collapse" id="nav">
+					<ul class="nav navbar-nav">
+						<li><a href="/">Add application to database</a></li>
+						<li class="active"><a href="/search">Search for an application</a></li>
+						<li><a href="/update">Update status of application</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>DOB</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for person in lines%}
+						<tr>
+							<td>{{loop.index}}</td>
+							<td>{{person.name}}</td>
+							<td>{{person.dob}}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

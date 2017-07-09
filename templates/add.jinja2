@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script src="static/js/jquery-3.2.1.min.js"></script>
+		<script src="static/js/bootstrap.js"></script>
+		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="static/css/bootstrap-theme.css">
+	    <title>Trial</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/">Job Application Record <small>under development</small></a>
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav">
+						<span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+					</button>
+				</div>
+
+				<div class="collapse navbar-collapse" id="nav">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="/">Add application to database</a></li>
+						<li><a href="/search">Search for an application</a></li>
+						<li><a href="/update">Update status of application</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			
+			<div>
+				<form class="form-horizontal" method="POST">
+					<div class="form-group">	
+						<label class="control-label col-sm-2" for='company'>Company<span class='text-danger'>*</span>:</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" name="company" id="company" required>
+						</div>
+						<label class="control-label col-sm-2" for='position'>Position<span class='text-danger'>*</span>:</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" name="position" id="position" required>
+						</div>
+						<label class="control-label col-sm-2" for='pid'>Position ID:</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" name="pid" id="pid" required>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="country">Country<span class='text-danger'>*</span>:</label>
+						<div class="col-sm-3">
+							<div class="row container-fluid">
+								<select class="form-control" required id="country" name="country">
+									<option>US</option>
+									<option>Canada</option>
+									<option>UK</option>
+									<option>Australia</option>
+									<option>India</option>
+									<option>Other</option>
+								</select>
+							</div>
+							<div class="row container-fluid">
+								<input class="form-control" type="text" name="other_country">
+							</div>
+						</div>
+						<label class="control-label col-sm-2" for='location'>Location:</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" name="location" id="location">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-sm-2" for='skills'>Skills<span class='text-danger'>*</span>:</label>
+						<div class='row'>
+							<div class='col-sm-3' name="skills">
+								<div class='checkbox'>
+									<label><input type="checkbox" value="C">C</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" value="C++">C++</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" value="C#">C#</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" value="Java">Java</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" value="Python">Python</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" value=".Net">.Net</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" value="HTML">HTML</label>
+								</div>
+							</div>
+							<div class='col-sm-3' name="skills">
+								<div class='checkbox'>
+									<label><input type="checkbox" value="CSS">CSS</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" value="JavaScript">JavaScript</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" value="jQuery">jQuery</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" value="Java">OpenCV</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" value="Python">Machine Learning</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" value=".Net">GIT</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" value="C">SQL</label>
+								</div>
+							</div>
+							<div class='col-sm-3' name="skills">
+								<div class='checkbox'>
+									<label><input type="checkbox" value="NoSQL">NoSQL</label>
+								</div>
+								<input class='form-control input-sm' type="text" name="other_skills" id='other_skills' placeholder="Any other skills ...">
+							</div>
+						</div>
+					</div>
+					<button type="button" class='btn btn-success'>Submit</button>
+					<button type="button" class='btn btn-danger'>Clear</button>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
