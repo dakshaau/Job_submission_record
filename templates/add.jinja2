@@ -3,9 +3,10 @@
 	<head>
 		<script src="static/js/jquery-3.2.1.min.js"></script>
 		<script src="static/js/bootstrap.js"></script>
+		<script type="text/javascript" src="static/js/add.js"></script>
 		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="static/css/bootstrap-theme.css">
-	    <title>Trial</title>
+	    <title>Job Application Portal</title>
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse">
@@ -43,7 +44,7 @@
 						</div>
 						<label class="control-label col-sm-2" for='pid'>Position ID:</label>
 						<div class="col-sm-2">
-							<input class="form-control" type="text" name="pid" id="pid" required>
+							<input class="form-control" type="text" name="pid" id="pid">
 						</div>
 					</div>
 					
@@ -60,8 +61,8 @@
 									<option>Other</option>
 								</select>
 							</div>
-							<div class="row container-fluid">
-								<input class="form-control" type="text" name="other_country">
+							<div class="row container-fluid hidden">
+								<input class="form-control input-sm" type="text" name="other_country" placeholder="Other country ...">
 							</div>
 						</div>
 						<label class="control-label col-sm-2" for='location'>Location:</label>
@@ -71,64 +72,84 @@
 					</div>
 
 					<div class="form-group">
-						<label class="control-label col-sm-2" for='skills'>Skills<span class='text-danger'>*</span>:</label>
+						<label class="control-label col-sm-2" for='skill'>Skills<span class='text-danger'>*</span>:</label>
 						<div class='row'>
-							<div class='col-sm-3' name="skills">
-								<div class='checkbox'>
-									<label><input type="checkbox" value="C">C</label>
+							<div class='col-sm-3' >
+								<div class='checkbox' id='skill'>
+									<label><input type="checkbox" name="skills" value="C">C</label>
 								</div>
 								<div class='checkbox'>
-									<label><input type="checkbox" value="C++">C++</label>
+									<label><input type="checkbox" name="skills" value="C++" >C++</label>
 								</div>
 								<div class='checkbox'>
-									<label><input type="checkbox" value="C#">C#</label>
+									<label><input type="checkbox" name="skills" value="C#" >C#</label>
 								</div>
 								<div class='checkbox'>
-									<label><input type="checkbox" value="Java">Java</label>
+									<label><input type="checkbox" name="skills" value="Java" >Java</label>
 								</div>
 								<div class='checkbox'>
-									<label><input type="checkbox" value="Python">Python</label>
+									<label><input type="checkbox" name="skills" value="Python" >Python</label>
 								</div>
 								<div class='checkbox'>
-									<label><input type="checkbox" value=".Net">.Net</label>
+									<label><input type="checkbox" name="skills" value=".Net" >.Net</label>
 								</div>
 								<div class='checkbox'>
-									<label><input type="checkbox" value="HTML">HTML</label>
-								</div>
-							</div>
-							<div class='col-sm-3' name="skills">
-								<div class='checkbox'>
-									<label><input type="checkbox" value="CSS">CSS</label>
-								</div>
-								<div class='checkbox'>
-									<label><input type="checkbox" value="JavaScript">JavaScript</label>
-								</div>
-								<div class='checkbox'>
-									<label><input type="checkbox" value="jQuery">jQuery</label>
-								</div>
-								<div class='checkbox'>
-									<label><input type="checkbox" value="Java">OpenCV</label>
-								</div>
-								<div class='checkbox'>
-									<label><input type="checkbox" value="Python">Machine Learning</label>
-								</div>
-								<div class='checkbox'>
-									<label><input type="checkbox" value=".Net">GIT</label>
-								</div>
-								<div class='checkbox'>
-									<label><input type="checkbox" value="C">SQL</label>
+									<label><input type="checkbox" name="skills" value="HTML" >HTML</label>
 								</div>
 							</div>
-							<div class='col-sm-3' name="skills">
+							<div class='col-sm-3' name="skill">
 								<div class='checkbox'>
-									<label><input type="checkbox" value="NoSQL">NoSQL</label>
+									<label><input type="checkbox" name="skills" value="CSS" >CSS</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" name="skills" value="JavaScript" >JavaScript</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" name="skills" value="jQuery" >jQuery</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" name="skills" value="OpenCV" >OpenCV</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" name="skills" value="Machine Learning" >Machine Learning</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" name="skills" value="git">GIT</label>
+								</div>
+								<div class='checkbox'>
+									<label><input type="checkbox" name="skills" value="SQL">SQL</label>
+								</div>
+							</div>
+							<div class='col-sm-3' name="skill">
+								<div class='checkbox'>
+									<label><input type="checkbox" name="skills" value="NoSQL" >NoSQL</label>
 								</div>
 								<input class='form-control input-sm' type="text" name="other_skills" id='other_skills' placeholder="Any other skills ...">
 							</div>
 						</div>
 					</div>
-					<button type="button" class='btn btn-success'>Submit</button>
-					<button type="button" class='btn btn-danger'>Clear</button>
+
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="portal">Submitted Through<span class="text-danger">*</span>:</label>
+						<div class="col-sm-10" id='portal'>
+							<div class="row container-fluid">
+								<label class="radio-inline"><input type="radio" name="portals" value="LinkedIn" id='LinkedIn' required>LinkedIn</label>
+								<label class="radio-inline"><input type="radio" name="portals" value="AngelList" id='AngelList'>AngelList</label>
+								<label class="radio-inline"><input type="radio" name="portals" value="Indeed" id='Indeed'>Indeed</label>
+								<label class="radio-inline"><input type="radio" name="portals" value="ZipRecruiter" id='ZipRecruiter'>ZipRecruiter</label>
+								<label class="radio-inline"><input type="radio" name="portals" value="Company Website" id='comp_web'>Company Website</label>
+								<label class="radio-inline"><input type="radio" name="portals" value="Other" id='other_p'>Other</label>
+							</div>
+							<div class="row hidden container-fluid col-sm-3">
+								<input class="form-control input-sm" type="text" name="other_portals" id='other_portal' placeholder="Other portal ...">
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group text-center">
+						<button type="submit" class='btn btn-success'>Submit</button>
+						<button type="button" class='btn btn-danger' id='clear'>Clear</button>
+					</div>
 				</form>
 			</div>
 		</div>
