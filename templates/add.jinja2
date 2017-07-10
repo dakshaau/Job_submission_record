@@ -50,7 +50,7 @@
 					
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="country">Country<span class='text-danger'>*</span>:</label>
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<div class="row container-fluid">
 								<select class="form-control" required id="country" name="country">
 									<option>US</option>
@@ -66,8 +66,12 @@
 							</div>
 						</div>
 						<label class="control-label col-sm-2" for='location'>Location:</label>
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<input class="form-control" type="text" name="location" id="location">
+						</div>
+						<label class="control-label col-sm-2" for="date">Date<span class="text-danger">*</span>:</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="date" name="date" id="date" required>
 						</div>
 					</div>
 
@@ -146,12 +150,25 @@
 						</div>
 					</div>
 
+					<p class="text-center">All the fields marked with <span class="text-danger">*</span> are required.</p>
+
 					<div class="form-group text-center">
 						<button type="submit" class='btn btn-success'>Submit</button>
 						<button type="button" class='btn btn-danger' id='clear'>Clear</button>
 					</div>
+
+					<div class="{{success}} alert alert-success fade in alert-dismissable">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<strong>Success!</strong> Job application added to database.
+					</div>
+
+					<div class="{{failure}} alert alert-danger fade in alert-dismissable">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<strong>Error!</strong> Server error! Unable to add application to database.
+					</div>
 				</form>
 			</div>
+
 		</div>
 	</body>
 </html>

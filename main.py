@@ -5,12 +5,12 @@ import alchemy as al
 
 @view_config(route_name='add', renderer='/templates/add.jinja2')
 def add_record(request):
-    return {}
+    return {'success':'hidden','failure':'hidden'}
 
 @view_config(route_name='add', renderer='/templates/add.jinja2', request_method='POST')
 def submitted(request):
     print(request.params)
-    return {}
+    return {'success':'','failure':'hidden'}
 
 @view_config(route_name='search', renderer='/templates/search.jinja2')
 def search_record(request):

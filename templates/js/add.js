@@ -4,6 +4,7 @@ $(document).ready(function(){
     $("#other_skills").attr('required','true')
 
     $("[name='portals']").change(function(){
+        $("#other_portal").val('')
         if($(this).val() == "Other"){
         	$("#other_portal").parent().removeClass("hidden");
         	$("#other_portal").attr("required",'true')
@@ -15,6 +16,7 @@ $(document).ready(function(){
     });
 
    	$("#country").change(function(){
+   		$("[name='other_country']").val('')
    		if($(this).val() == "Other"){
    			$("[name='other_country']").parent().removeClass('hidden')
    			$("[name='other_country']").attr('required','true')
