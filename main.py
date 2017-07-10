@@ -8,7 +8,7 @@ session = None
 
 @view_config(route_name='add', renderer='/templates/add.jinja2')
 def add_record(request):
-    return {'success':'hidden','failure':'hidden'}
+    return {'no_app':al.get_count(session),'success':'hidden','failure':'hidden'}
 
 @view_config(route_name='add', renderer='/templates/add.jinja2', request_method='POST')
 def submitted(request):
@@ -55,10 +55,12 @@ def submitted(request):
     template_args = {}
     try:
         al.insert_job(session, args)
+        template_args['no_app'] = al.get_count(session)
         template_args['success'] = ''
         template_args['failure'] = 'hidden'
     except Exception as e:
         print(e)
+        template_args['no_app'] = al.get_count(session)
         template_args['success'] = 'hidden'
         template_args['failure'] = ''
     finally:

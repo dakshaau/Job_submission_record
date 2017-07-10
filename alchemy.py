@@ -23,7 +23,7 @@ class JobApplication(Base):
 	status = Column('status', Text)
 
 def get_count(session):
-	return len(session.query(JobApplication).all())
+	return session.query(JobApplication).count()
 
 def connect(c_str):
 	engine = create_engine(c_str)
