@@ -3,6 +3,7 @@ from pyramid.config import Configurator
 from pyramid.view import view_config
 import alchemy as al
 from datetime import date, datetime
+import json
 
 session = None
 
@@ -68,13 +69,71 @@ def submitted(request):
 
 @view_config(route_name='search', renderer='/templates/search.jinja2')
 def search_record(request):
-    return {'lines':[{'name':'Daksh','dob':'25-Nov-1993'},
-    {'name':'Charul','dob':'8-Aug-1993'},
-    {'name':'Ajir','dob':'21-Nov-1990'}]}
+    return {'company_val':'', 'pos_cal':'', 'p_id_val': ''}
 
-@view_config(route_name='update', renderer='/templates/update.jinja2')
+@view_config(route_name='search', renderer='/templates/search2.jinja2', request_method='POST')
 def update_record(request):
-    return {}
+    # print(request.params)
+    param = {'company': request.params['company']}
+    if request.params['position'] != '':
+        param['position'] = request.params['position']
+    if request.params['position_id'] != '':
+        param['p_id'] = request.params['position_id']
+
+    res = al.get_jobs(session, param)
+    if len(res) == 0:
+        return {'company_val':request.params['company'],
+        'pos_val': request.params['position'],
+        'p_id_val': request.params['position_id'],
+        'res_count':0, 'table_hidden':'hidden', 'job':{
+        'comp':'',
+        'pos':'',
+        'pid':'',
+        'date':'',
+        'skills':[],
+        'portal':'',
+        'resp':'',
+        'status':'',
+        'country':'',
+        'loc':''
+        }}
+    else:
+        return {'company_val':request.params['company'],
+        'pos_val': request.params['position'],
+        'p_id_val': request.params['position_id'],
+        'res_count':len(res), 'table_hidden':'',
+        'apps': [dict([('ID',job.ID),('comp',job.comp),('pos',job.pos),('date',str(job.app))]) for job in res],
+        'job':{
+        'comp':'',
+        'pos':'',
+        'pid':'',
+        'date':'',
+        'skills':[],
+        'portal':'',
+        'resp':'',
+        'status':'',
+        'country':'',
+        'loc':''
+        }}
+
+@view_config(route_name='update',request_method='POST', renderer='json')
+def send_job(request):
+    if request.params['status'] == 'view':
+        job = al.get_job_by_id(session, request.params['ID'])
+        return json.dumps({
+            'ID': job.ID,
+            'company': job.comp,
+            'pos': job.pos,
+            'p_id': job.p_id,
+            'country': job.country,
+            'loc': job.loc,
+            'skills': job.skills,
+            'portal': job.portal,
+            'resp': job.resp,
+            'status': job.status,
+            'date': str(job.app)
+            })
+
 
 if __name__ == '__main__':
     host, db, port, uname, pswd = [line.strip() for line in open('config','r').readlines()]

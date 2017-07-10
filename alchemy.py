@@ -39,8 +39,21 @@ def insert_job(session, values):
 	session.commit()
 	print('Inserted new row ...')
 
+def get_job_by_id(session, ID):
+	return session.query(JobApplication).filter_by(ID=ID).first()
+
 def get_jobs(session, param):
-	return session.query(JobApplication).filter(JobApplication.comp.ilike(param['company'].lower())).all()
+	if 'company' in param and 'position' in param and 'p_id' not in param:
+		return session.query(JobApplication).filter(JobApplication.comp.ilike('%{}%'.format(param['company'])),
+			JobApplication.pos.ilike('%{}%'.format(param['pos']))).all()
+	elif 'company' in param and 'position' in param and 'p_id' in param:
+		return session.query(JobApplication).filter(JobApplication.comp.ilike('%{}%'.format(param['company'])),
+			JobApplication.pos.ilike('%{}%'.format(param['pos'])), JobApplication.p_id == param['p_id']).all()
+	elif 'company' in param and 'position' not in param and 'p_id' in param:
+		return session.query(JobApplication).filter(JobApplication.comp.ilike('%{}%'.format(param['company'])),
+			JobApplication.p_id == param['p_id']).all()
+	elif 'company' in param and 'position' not in param and 'p_id' not in param:
+		return session.query(JobApplication).filter(JobApplication.comp.ilike('%{}%'.format(param['company']))).all()
 
 def update_job(session, company, position, status='', position_id=None, application_id=None):
 	if position_id is None and application_id is None:

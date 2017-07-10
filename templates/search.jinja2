@@ -3,6 +3,7 @@
 	<head>
 		<script src="static/js/jquery-3.2.1.min.js"></script>
 		<script src="static/js/bootstrap.js"></script>
+		{% block script %}{% endblock %}
 		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="static/css/bootstrap-theme.css">
 	    <title>Job Application Portal</title>
@@ -23,30 +24,37 @@
 					<ul class="nav navbar-nav">
 						<li><a href="/">Add application to database</a></li>
 						<li class="active"><a href="/search">Search for an application</a></li>
-						<li><a href="/update">Update status of application</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 		<div class="container">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Name</th>
-						<th>DOB</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for person in lines%}
-						<tr>
-							<td>{{loop.index}}</td>
-							<td>{{person.name}}</td>
-							<td>{{person.dob}}</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
+			<form class="form-horizontal" action="/search" method="POST">
+				<p class="text-justify">Here you can search and update the already applied jobs. You need to provide at least the <mark>company name</mark> to see the list of applied jobs below.</p>
+				<p class="text-justify">The job application's full details can be viewed by clicking on the job within the table and its status can be updated from there as well</p>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="company">Copmany<span class="text-danger">*</span>:</label>
+					<div class="col-sm-2">
+						<input class="form-control" type="text" name="company" value="{{company_val}}" required>
+					</div>
+					<label class="control-label col-sm-2" for="position">Position:</label>
+					<div class="col-sm-2">
+						<input class="form-control" type="text" name="position" value="{{pos_val}}">
+					</div>
+					<label class="control-label col-sm-2" for="position_id">Position ID:</label>
+					<div class="col-sm-2">
+						<input type="text" name="position_id" class="form-control" value="{{p_id_val}}">
+					</div>
+				</div>
+				<div class="text-center">
+					<button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-search"></span> Search</button>
+				</div>
+			</form>
+			{% block search_result %}
+			{% endblock %}
+			{% block modal %}
+			{% endblock %}
+			
 		</div>
 	</body>
 </html>

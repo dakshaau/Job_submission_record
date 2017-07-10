@@ -1,0 +1,112 @@
+{% extends "search.jinja2" %}
+{% block script %}
+<script type="text/javascript" src="static/js/search.js"></script>
+{% endblock %}
+
+{% block search_result %}
+<p class="text-center">Found {{res_count}} results!</p>
+<div class="table-responsive {{table_hidden}}">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Company</th>
+				<th>Position</th>
+				<th>Date Applied</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for app in apps%}
+				<tr name='job_data'>
+					<td>{{app.ID}}</td>
+					<td>{{app.comp}}</td>
+					<td>{{app.pos}}</td>
+					<td>{{app.date}}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}
+
+{% block modal %}
+<div class="modal fade" id="job_detail" role="dialog">
+    <div class="modal-dialog">
+    
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Application Details</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<label class="col-sm-3 control-label">Company:</label>
+						<p class="col-sm-9" id="modal_comp">{{job.comp}}</p>
+					</div>
+					<div class="row">
+						<label class="col-sm-3 control-label">Position:</label>
+						<p class="col-sm-9" id="modal_pos">{{job.pos}}</p>
+					</div>
+
+					<div class="row">
+						<label class="col-sm-3 control-label">Position ID:</label>
+						<p class="col-sm-9" id="modal_pid">{{job.pid}}</p>
+					</div>
+					
+					<div class="row">
+						<label class="col-sm-3 control-label">Date Applied:</label>
+						<p class="col-sm-9" id="modal_date">{{job.date}}</p>
+					</div>
+
+					<div class="row">
+						<label class="col-sm-3 control-label">Country:</label>
+						<p class="col-sm-9" id="modal_country">{{job.country}}</p>
+					</div>
+
+					<div class="row">
+						<label class="col-sm-3 control-label">Location:</label>
+						<p class="col-sm-9" id="modal_loc">{{job.loc}}</p>
+					</div>
+
+					<div class="row">
+						<label class="col-sm-2 control-label">Skills:</label>
+						<div class="col-sm-10 container-fluid" id="modal_skills">
+						</div>
+					</div>
+
+					<div class="row">
+						<label class="col-sm-3 control-label">Applied through:</label>
+						<p class="col-sm-9" id="modal_portal">{{job.portal}}</p>
+					</div>
+
+					<div class="row">
+						<label class="col-sm-3 control-label">Rensponded yet:</label>
+						<div class="col-sm-9">
+							<p id="modal_resp">{{job.resp}}</p>
+							<select class="form-control hidden" id="modal_resp_select">
+								<option value='No'>No</option>
+								<option value="Yes">Yes</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="row">
+						<label class="col-sm-3 control-label">Current status:</label>
+						<div class="col-sm-9">
+							<p id="modal_status">{{job.status}}</p>
+							<input class="input-sm form-control hidden" type="text" value="{{job.status}}" id='modal_status_text'>
+						</div>
+					</div>
+				</div>
+	        </div>
+	        <div class="modal-footer">
+				<button type="button" class="btn btn-default" id='modal_update'>Update Application</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+		</div>
+      
+    </div>
+</div>
+{% endblock %}
