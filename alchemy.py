@@ -55,54 +55,18 @@ def get_jobs(session, param):
 	elif 'company' in param and 'position' not in param and 'p_id' not in param:
 		return session.query(JobApplication).filter(JobApplication.comp.ilike('%{}%'.format(param['company']))).all()
 
-def update_job(session, company, position, status='', position_id=None, application_id=None):
-	if position_id is None and application_id is None:
-		rs = session.query(JobApplication).filter(JobApplication.comp.ilike(company.lower()),
-			JobApplication.pos.ilike(position.lower())).all()
-		if len(rs) > 1:
-			print('Multiple results, need position or application ID')
-			return 'Multiple results, need position or application ID'
-		if len(rs) == 0:
-			print('Unable to find application ...')
-			return 'No result'
-		else:
-			job = None
-			for job in rs:
-				job.resp = True
-				job.status = status
-
-			session.commit()
-			print('application_id:{} updated succesfully ...'.format(job.ID))
-			return job.ID
-	
-	elif position_id is None:
-		rs = session.query(JobApplication).filter_by(ID=application_id).all()
-		if len(rs) == 0:
-			print('Unable to find application ...')
-			return 'No result'
-		else:
-			job = rs[0]
-			job.resp = True
-			job.status = status
-			session.commit()
-			print('application_id:{} updated succesfully ...'.format(job.ID))
-			return job.ID
-
-	elif application_id is None:
-		rs = session.query(JobApplication).filter(JobApplication.comp.ilike(company.lower()),
-			JobApplication.pos.ilike(position.lower()), JobApplication.p_id.ilike(position_id.lower())).all()
-		if len(rs) > 1:
-			print('Multiple results, need application ID')
-			return 'Multiple results, need application ID'
-		else:
-			job = None
-			for job in rs:
-				job.resp = True
-				job.status = status
-
-			session.commit()
-			print('application_id:{} updated succesfully ...'.format(job.ID))
-			return job.ID
+def update_job(session, resp=True, status='', application_id=None):	
+	rs = session.query(JobApplication).filter_by(ID=application_id).all()
+	if len(rs) == 0:
+		print('Unable to find application ...')
+		return 'No result'
+	else:
+		job = rs[0]
+		job.resp = resp
+		job.status = status
+		session.commit()
+		print('application_id:{} updated succesfully ...'.format(job.ID))
+		return job.ID
 
 if __name__ == '__main__':
 	

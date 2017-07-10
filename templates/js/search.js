@@ -20,6 +20,11 @@ $(document).ready(function(){
 		$('#modal_status_text').removeClass('hidden');
 	});
 
+	$('#modal_status_label').click(function(){
+		$('#modal_status').addClass('hidden');
+		$('#modal_status_text').removeClass('hidden');
+	});
+
 	$('#modal_status_text').dblclick(function(){
 		$('#modal_status').text($(this).val());
 		$(this).addClass('hidden');
@@ -28,6 +33,9 @@ $(document).ready(function(){
 
 	$("tr[name='job_data']").click(function(){
 		var job_id = $(this).children(':first-child').text();
+		$('#modal_skills').empty();
+
+
 		// console.log(job_id);
 		$.post('/update',
 		{
@@ -36,6 +44,7 @@ $(document).ready(function(){
 		},
 		function(data, status){
 			obj = JSON.parse(data);
+			$('#modal_id').text(obj.ID);
 			$('#modal_comp').text(obj.company);
 			$('#modal_pos').text(obj.pos);
 			$('#modal_pid').text(obj.p_id);
@@ -69,6 +78,40 @@ $(document).ready(function(){
 				var ul = $('#modal_skills').children('div:nth-of-type('+(ind)+')').children(':first-child').append(li);
 			}
 			$('#job_detail').modal();
+		});
+	});
+
+	$('#modal_update').click(function(){
+		obj = {
+			status: "update",
+			ID: $('#modal_id').text(),
+			stat: $('#modal_status_text').text()
+		}
+		if($('#modal_resp_select').val() == 'Yes'){
+			obj.resp = true;
+		}else{
+			obj.resp = false;
+		}
+		$.post('/update',obj, function(data, status){
+			_obj = JSON.parse(data);
+			// console.log(_obj);
+			if(_obj.status == 'Success'){
+				div = $("<div class='alert alert-success alert-dismissable fade in'></div>");
+				a = $("<a href='#' class='close' data-dismiss='alert' aria-label='close'></a>").html('&times;');
+				div.append(a);
+				strong = $("<strong></strong>").text('Success!')
+				div.append(strong);
+				div.append(' Application updated.')
+				$('.modal-body').append(div)
+			}else if(_obj.status == 'Error'){
+				div = $("<div class='alert alert-danger alert-dismissable fade in'></div>");
+				a = $("<a href='#' class='close' data-dismiss='alert' aria-label='close'></a>").html('&times;');
+				div.append(a);
+				strong = $("<strong></strong>").text('Error!');
+				div.append(strong);
+				div.append(' Unable to update application.');
+				$('.modal-body').append(div);
+			}
 		});
 	});
 

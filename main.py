@@ -85,36 +85,13 @@ def update_record(request):
         return {'company_val':request.params['company'],
         'pos_val': request.params['position'],
         'p_id_val': request.params['position_id'],
-        'res_count':0, 'table_hidden':'hidden', 'job':{
-        'comp':'',
-        'pos':'',
-        'pid':'',
-        'date':'',
-        'skills':[],
-        'portal':'',
-        'resp':'',
-        'status':'',
-        'country':'',
-        'loc':''
-        }}
+        'res_count':0, 'table_hidden':'hidden'}
     else:
         return {'company_val':request.params['company'],
         'pos_val': request.params['position'],
         'p_id_val': request.params['position_id'],
         'res_count':len(res), 'table_hidden':'',
-        'apps': [dict([('ID',job.ID),('comp',job.comp),('pos',job.pos),('date',str(job.app))]) for job in res],
-        'job':{
-        'comp':'',
-        'pos':'',
-        'pid':'',
-        'date':'',
-        'skills':[],
-        'portal':'',
-        'resp':'',
-        'status':'',
-        'country':'',
-        'loc':''
-        }}
+        'apps': [dict([('ID',job.ID),('comp',job.comp),('pos',job.pos),('date',str(job.app))]) for job in res]}
 
 @view_config(route_name='update',request_method='POST', renderer='json')
 def send_job(request):
@@ -133,6 +110,33 @@ def send_job(request):
             'status': job.status,
             'date': str(job.app)
             })
+    elif request.params['status'] == 'update':
+        ID = request.params['ID']
+        status = request.params['stat']
+        resp = request.params['resp']
+        if resp == 'false':
+            resp = False
+        else:
+            resp = True
+        # print(resp, type(resp))
+        ret = None
+        try:
+            ret = al.update_job(session, resp=resp, application_id=ID, status=status)
+        except Exception as e:
+            print(e)
+            return json.dumps({
+                    'status': 'Error'
+                })
+        else:
+            if type(ret) is str:
+                return json.dumps({
+                        'status': 'Error'
+                    })
+            else:
+                return json.dumps({
+                        'status': 'Success'
+                    })
+
 
 
 if __name__ == '__main__':

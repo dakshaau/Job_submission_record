@@ -42,32 +42,36 @@
 			<div class="modal-body">
 				<div class="container-fluid">
 					<div class="row">
+						<label class="col-sm-3 control-label">Application ID:</label>
+						<p class="col-sm-9" id="modal_id"></p>
+					</div>
+					<div class="row">
 						<label class="col-sm-3 control-label">Company:</label>
-						<p class="col-sm-9" id="modal_comp">{{job.comp}}</p>
+						<p class="col-sm-9" id="modal_comp"></p>
 					</div>
 					<div class="row">
 						<label class="col-sm-3 control-label">Position:</label>
-						<p class="col-sm-9" id="modal_pos">{{job.pos}}</p>
+						<p class="col-sm-9" id="modal_pos"></p>
 					</div>
 
 					<div class="row">
 						<label class="col-sm-3 control-label">Position ID:</label>
-						<p class="col-sm-9" id="modal_pid">{{job.pid}}</p>
+						<p class="col-sm-9" id="modal_pid"></p>
 					</div>
 					
 					<div class="row">
 						<label class="col-sm-3 control-label">Date Applied:</label>
-						<p class="col-sm-9" id="modal_date">{{job.date}}</p>
+						<p class="col-sm-9" id="modal_date"></p>
 					</div>
 
 					<div class="row">
 						<label class="col-sm-3 control-label">Country:</label>
-						<p class="col-sm-9" id="modal_country">{{job.country}}</p>
+						<p class="col-sm-9" id="modal_country"></p>
 					</div>
 
 					<div class="row">
 						<label class="col-sm-3 control-label">Location:</label>
-						<p class="col-sm-9" id="modal_loc">{{job.loc}}</p>
+						<p class="col-sm-9" id="modal_loc"></p>
 					</div>
 
 					<div class="row">
@@ -78,13 +82,13 @@
 
 					<div class="row">
 						<label class="col-sm-3 control-label">Applied through:</label>
-						<p class="col-sm-9" id="modal_portal">{{job.portal}}</p>
+						<p class="col-sm-9" id="modal_portal"></p>
 					</div>
 
 					<div class="row">
 						<label class="col-sm-3 control-label">Rensponded yet:</label>
 						<div class="col-sm-9">
-							<p id="modal_resp">{{job.resp}}</p>
+							<p id="modal_resp"></p>
 							<select class="form-control hidden" id="modal_resp_select">
 								<option value='No'>No</option>
 								<option value="Yes">Yes</option>
@@ -93,10 +97,10 @@
 					</div>
 
 					<div class="row">
-						<label class="col-sm-3 control-label">Current status:</label>
+						<label class="col-sm-3 control-label" id="modal_status_label">Current status:</label>
 						<div class="col-sm-9">
-							<p id="modal_status">{{job.status}}</p>
-							<input class="input-sm form-control hidden" type="text" value="{{job.status}}" id='modal_status_text'>
+							<p id="modal_status"></p>
+							<input class="input-sm form-control hidden" type="text" value="" id='modal_status_text'>
 						</div>
 					</div>
 				</div>
