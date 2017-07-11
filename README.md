@@ -57,7 +57,7 @@ postgres
 password
 ```
 
-The IP address and port on which the server runs are hardcoded into `main.py`. The server runs at `127.0.0.1:6543`. You can change that in `line 158` of [main.py](main.py).
+The IP address and port on which the server runs are hardcoded into `main.py`. The server runs at `127.0.0.1:6543`. You can change that in `line 158` of [main.py](main.py#L158).
 
 To finally run the server, run the command:
 
