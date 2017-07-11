@@ -18,12 +18,12 @@ This is a python web application which can be used by job applicants to keep a t
 
 #### Screen Shots:
 
-- [Page to add a record]('screens/Add record.png')
-- [Search page]('screens/search page.png')
-- [Search Results]('screens/search results.png')
-- [Display application details]('screens/job details.png')
-- [Update status]('screens/update_1.png')
-- [Update success]('screens/update_2.png')
+- [Page to add a record](screens/add_record.png)
+- [Search page](screens/search_page.png)
+- [Search Results](screens/search_results.png)
+- [Display application details](screens/job_details.png)
+- [Update status](screens/update_1.png)
+- [Update success](screens/update_2.png)
 
 ## Requirements:
 1. pyramid
@@ -57,7 +57,7 @@ postgres
 password
 ```
 
-The IP address and port on which the server runs are hardcoded into `main.py`. The server runs at `127.0.0.1:6543`. You can change that in `line 158` of [main.py]('main.py').
+The IP address and port on which the server runs are hardcoded into `main.py`. The server runs at `127.0.0.1:6543`. You can change that in `line 158` of [main.py](main.py).
 
 To finally run the server, run the command:
 
