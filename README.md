@@ -8,6 +8,23 @@
 
 **Web framework:** Pyramid
 
+## Introduction:
+
+This is a python web application which can be used by job applicants to keep a track of their job applications. The portal allows you to:
+
+- Add an application to the job database
+- Search for already applied job by, *company name*, *position name*, and/or *position_id*.
+- Update status of any job in the search results
+
+#### Screen Shots:
+
+- [Page to add a record]('screens/Add record.png')
+- [Search page]('screens/search page.png')
+- [Search Results]('screens/search results.png')
+- [Display application details]('screens/job details.png')
+- [Update status]('screens/update_1.png')
+- [Update success]('screens/update_2.png')
+
 ## Requirements:
 1. pyramid
 2. pyramid_jinja2
@@ -23,7 +40,7 @@ To run this web application, you need to first have a database ready in PostgreS
 Once the databse has been created, a file with the name `config` should be placed with the main python files. This file contains the connection information for the database. Each line should be a valid string containing only the relavent information. Below are the order of information:
 
 1. Host or IP address
-2. Databse name
+2. Database name
 3. Port
 4. Username
 5. Password
@@ -32,7 +49,7 @@ Once the databse has been created, a file with the name `config` should be place
 
 Here is an example `config` file:
 
-```
+```text
 localhost
 trial_database
 5432
@@ -47,3 +64,5 @@ To finally run the server, run the command:
 ```shell
 python main.py
 ```
+
+**NOTE:** Close the server using `CTRL+C` to safely close the connection with the database.
