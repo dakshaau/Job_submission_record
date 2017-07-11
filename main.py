@@ -72,7 +72,7 @@ def search_record(request):
     return {'company_val':'', 'pos_cal':'', 'p_id_val': ''}
 
 @view_config(route_name='search', renderer='/templates/search2.jinja2', request_method='POST')
-def update_record(request):
+def display_records(request):
     # print(request.params)
     param = {'company': request.params['company']}
     if request.params['position'] != '':
@@ -94,7 +94,7 @@ def update_record(request):
         'apps': [dict([('ID',job.ID),('comp',job.comp),('pos',job.pos),('date',str(job.app))]) for job in res]}
 
 @view_config(route_name='update',request_method='POST', renderer='json')
-def send_job(request):
+def send_or_update_job(request):
     if request.params['status'] == 'view':
         job = al.get_job_by_id(session, request.params['ID'])
         return json.dumps({
@@ -119,6 +119,8 @@ def send_job(request):
         else:
             resp = True
         # print(resp, type(resp))
+        if status == '':
+            status = None
         ret = None
         try:
             ret = al.update_job(session, resp=resp, application_id=ID, status=status)

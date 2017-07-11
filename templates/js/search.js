@@ -15,6 +15,14 @@ $(document).ready(function(){
 		$('#modal_resp').removeClass('hidden');
 	});
 
+	$('#modal_resp_select').change(function(){
+		if($(this).val() == 'Yes'){
+			$('#modal_resp').text('Yes')
+		}else{
+			$('#modal_resp').text('No')
+		}
+	});
+
 	$('#modal_status').click(function(){
 		$(this).addClass('hidden');
 		$('#modal_status_text').removeClass('hidden');
@@ -31,9 +39,18 @@ $(document).ready(function(){
 		$('#modal_status').removeClass('hidden');
 	});
 
+	$('#modal_status_text').change(function(){
+		$('#modal_status').text($(this).val());
+	});
+
 	$("tr[name='job_data']").click(function(){
 		var job_id = $(this).children(':first-child').text();
 		$('#modal_skills').empty();
+		$('#modal_status').removeClass('hidden');
+		$('#modal_status_text').addClass('hidden');
+		$('#modal_resp_select').addClass('hidden');
+		$('#modal_resp').removeClass('hidden');
+		$('.alert-dismissable').remove();
 
 
 		// console.log(job_id);
@@ -85,7 +102,7 @@ $(document).ready(function(){
 		obj = {
 			status: "update",
 			ID: $('#modal_id').text(),
-			stat: $('#modal_status_text').text()
+			stat: $('#modal_status').text()
 		}
 		if($('#modal_resp_select').val() == 'Yes'){
 			obj.resp = true;
